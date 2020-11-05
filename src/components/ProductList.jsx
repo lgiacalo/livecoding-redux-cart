@@ -3,7 +3,7 @@ import React from 'react';
 const ProductList = ({ products }) => (
   <nav className="ProductList">
     {products.map((prod) => (
-      <div className="ProductCard">
+      <div className="ProductCard" key={prod.id}>
         <h3>{prod.name}</h3>
         <img src={prod.image} />
         <p>{prod.price}&euro;</p>

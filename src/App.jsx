@@ -1,44 +1,58 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
+import * as api from './api';
+import {
+  FETCH_PRODUCTS_REQUEST,
+  FETCH_PRODUCTS_SUCCESS,
+  FETCH_PRODUCTS_FAILURE,
+} from './store/actions/types';
 import './App.css';
 
-const products = [
-  {
-    id: 1,
-    price: 700,
-    name: 'Apple Macbook',
-    image:
-      'https://chekromul.github.io/uikit-ecommerce-template/images/products/1/1-medium.jpg',
-    stock: 2,
-  },
-  {
-    id: 2,
-    price: 900,
-    name: 'Lenovo IdeaPad',
-    image:
-      'https://chekromul.github.io/uikit-ecommerce-template/images/products/3/3-medium.jpg',
-    stock: 3,
-  },
-  {
-    id: 3,
-    price: 1000,
-    name: 'Dell XPS',
-    image:
-      'https://chekromul.github.io/uikit-ecommerce-template/images/products/5/5-medium.jpg',
-    stock: 1,
-  },
-];
+class App extends Component {
+  componentDidMount() {
+    this.fetchProducts();
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <Navbar />
-      <div className="container">
-        <ProductList products={products} />
+  fetchProducts = () => {
+    const { dispatch } = this.props;
+    dispatch({ type: FETCH_PRODUCTS_REQUEST });
+    api
+      .fetchProducts()
+      .then((products) => {
+        dispatch({ type: FETCH_PRODUCTS_SUCCESS, products });
+      })
+      .catch((error) => dispatch({ type: FETCH_PRODUCTS_FAILURE, error }));
+  };
+
+  render() {
+    const {
+      products,
+      network: { isLoading, error },
+    } = this.props;
+    return (
+      <div className="App">
+        <Navbar />
+        {error && (
+          <div>
+            <h3>{error}</h3>
+            <button type="button" onClick={this.fetchProducts}>
+              Try again
+            </button>
+          </div>
+        )}
+        <div className="container">
+          <ProductList products={products} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = ({ network, products }) => ({
+  network,
+  products,
+});
+
+export default connect(mapStateToProps)(App);
