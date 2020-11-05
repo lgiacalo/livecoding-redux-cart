@@ -2,7 +2,52 @@
   text-align: center;
 }
 
-code {
-  background: #eee;
-  color: #d04;
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.Navbar {
+  display: flex;
+  background-color: #446;
+  color: #eee;
+}
+
+.Navbar-left {
+  flex-grow: 1;
+}
+
+.Navbar ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.Navbar ul li {
+  list-style-type: none;
+  padding: 0.5em 1em;
+}
+
+.Navbar ul li a {
+  color: #eee;
+}
+
+.Navbar-cart {
+  background: #a00;
+  border-radius: 50%;
+  display: inline-block;
+  width: 1em;
+}
+
+.ProductList {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ProductCard {
+  width: 32%;
+}
+
+.ProductCard img {
+  max-height: 100px;
 }
