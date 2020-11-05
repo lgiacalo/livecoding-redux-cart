@@ -1,14 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ADD_TO_CART } from '../store/actions/types';
+import { addToCart } from '../store/actions';
 
-const ProductList = ({ products, dispatch }) => {
-  const handleAddToCart = (product) =>
-    dispatch({
-      type: ADD_TO_CART,
-      product,
-    });
-
+const ProductList = ({ products, handleAddToCart }) => {
   return (
     <nav className="ProductList">
       {products.map((prod) => (
@@ -25,4 +19,12 @@ const ProductList = ({ products, dispatch }) => {
   );
 };
 
-export default connect()(ProductList);
+const mapDispatchToProps = {
+  handleAddToCart: addToCart,
+};
+
+// const mapDispatchToProps = (dispatch) => ({
+//   handleAddToCart: product => addToCart(product)
+// })
+
+export default connect(null, mapDispatchToProps)(ProductList);

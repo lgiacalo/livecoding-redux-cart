@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+const reduceProducts = (cart) =>
+  cart.reduce((carry, { qty }) => carry + qty, 0);
 
 const Navbar = ({ cart }) => (
   <nav className="Navbar">
@@ -9,10 +13,12 @@ const Navbar = ({ cart }) => (
     </ul>
     <ul className="Navbar-right">
       <li>
-        <span className="Navbar-cart">{0}</span>
+        <span className="Navbar-cart">{reduceProducts(cart)}</span>
       </li>
     </ul>
   </nav>
 );
 
-export default Navbar;
+const mapStateToProps = ({ cart }) => ({ cart });
+
+export default connect(mapStateToProps)(Navbar);
