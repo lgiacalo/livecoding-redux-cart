@@ -1,16 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { ADD_TO_CART } from '../store/actions/types';
 
-const ProductList = ({ products }) => (
-  <nav className="ProductList">
-    {products.map((prod) => (
-      <div className="ProductCard" key={prod.id}>
-        <h3>{prod.name}</h3>
-        <img src={prod.image} />
-        <p>{prod.price}&euro;</p>
-        <button type="button">Add to cart</button>
-      </div>
-    ))}
-  </nav>
-);
+const ProductList = ({ products, dispatch }) => {
+  const handleAddToCart = (product) =>
+    dispatch({
+      type: ADD_TO_CART,
+      product,
+    });
 
-export default ProductList;
+  return (
+    <nav className="ProductList">
+      {products.map((prod) => (
+        <div className="ProductCard" key={prod.id}>
+          <h3>{prod.name}</h3>
+          <img src={prod.image} alt={prod.name} />
+          <p>{prod.price}&euro;</p>
+          <button type="button" onClick={() => handleAddToCart(prod)}>
+            Add to cart
+          </button>
+        </div>
+      ))}
+    </nav>
+  );
+};
+
+export default connect()(ProductList);
