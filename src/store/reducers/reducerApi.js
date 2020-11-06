@@ -16,7 +16,7 @@ export default function reducerApi(state = initialState, action) {
     case FETCH_PRODUCTS_SUCCESS:
       return { ...state, isLoading: false };
     case FETCH_PRODUCTS_FAILURE:
-      return { ...state, isLoading: false, error: action.error };
+      return { ...state, isLoading: false, error: action.error.message };
     default:
       return state;
   }
