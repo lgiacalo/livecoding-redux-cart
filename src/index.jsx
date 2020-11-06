@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import createStore from './store/createStore';
-import reducer from './store/reducers';
+import rootReducer from './store/reducers';
 import './index.css';
 import App from './App';
 
 const store = createStore(
-  reducer,
+  rootReducer,
   // eslint-disable-next-line no-underscore-dangle
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
