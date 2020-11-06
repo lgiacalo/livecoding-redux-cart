@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { cartSelector } from '../store/selectors';
 
 const reduceProducts = (cart) =>
@@ -12,10 +13,12 @@ const Navbar = ({ cart }) => (
   <nav className="Navbar">
     <ul className="Navbar-left">
       <li>
-        <a href="#">Home</a>
+        {/* <a href="#">Home</a> */}
+        <Link to="/">Home</Link>
       </li>
       <li>
-        <a href="#">Cart</a>
+        <Link to="/cart">Cart</Link>
+        {/* <a href="#">Cart</a> */}
       </li>
     </ul>
     <ul className="Navbar-right">

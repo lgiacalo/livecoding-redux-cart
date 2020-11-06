@@ -5,5 +5,6 @@ const instance = axios.create({
   timeout: 500,
 });
 
+// eslint-disable-next-line import/prefer-default-export
 export const fetchProducts = () =>
   instance.get('/products.json').then((res) => res.data);
