@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from '../actions/types';
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions/types';
 
 const initialState = [];
 
@@ -26,6 +26,12 @@ export default function reducerCart(state = initialState, action) {
           ];
       return newCart;
     }
+    case REMOVE_FROM_CART:
+      return state.reduce((acc, prod) => {
+        if (prod.id === action.product.id)
+          return prod.qty > 1 ? [...acc, { ...prod, qty: prod.qty - 1 }] : acc;
+        return [...acc, prod];
+      }, []);
     default:
       return state;
   }

@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { addToCart, removeToCart } from '../store/actions';
 import './Cart.css';
 
 /* eslint-disable react/prefer-stateless-function */
 
-function CartItem({ prod }) {
+function CartItem({ prod, handleAddToCart, handleRemoveFromCart }) {
   return (
     <figure key={prod.id} className="CartItem">
       <img src={prod.image} alt={prod.name} />
@@ -15,10 +16,10 @@ function CartItem({ prod }) {
         <p>Quantity: {prod.qty}</p>
       </div>
       <div>
-        <button type="button" onClick={() => {}}>
+        <button type="button" onClick={() => handleRemoveFromCart(prod)}>
           -
         </button>
-        <button type="button" onClick={() => {}}>
+        <button type="button" onClick={() => handleAddToCart(prod)}>
           +
         </button>
         <p>Total : {prod.price * prod.qty}&euro;</p>
@@ -35,6 +36,13 @@ CartItem.propTypes = {
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
+  handleRemoveFromCart: PropTypes.func.isRequired,
 };
 
-export default connect()(CartItem);
+const mapDispatchToProps = {
+  handleAddToCart: addToCart,
+  handleRemoveFromCart: removeToCart,
+};
+
+export default connect(null, mapDispatchToProps)(CartItem);
