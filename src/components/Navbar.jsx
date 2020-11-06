@@ -35,7 +35,7 @@ Navbar.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       price: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
+      qty: PropTypes.number.isRequired,
     }),
   ).isRequired,
 };
