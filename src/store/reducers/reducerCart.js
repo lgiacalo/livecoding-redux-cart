@@ -14,7 +14,16 @@ export default function reducerCart(state = initialState, action) {
               ? { ...foundInCart, qty: foundInCart.qty + 1 }
               : item,
           )
-        : [...state, { id: product.id, qty: 1, price: product.price }];
+        : [
+            ...state,
+            {
+              id: product.id,
+              qty: 1,
+              price: product.price,
+              name: product.name,
+              image: product.image,
+            },
+          ];
       return newCart;
     }
     default:

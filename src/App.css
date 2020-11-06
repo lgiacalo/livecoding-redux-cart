@@ -51,3 +51,30 @@
 .ProductCard img {
   max-height: 100px;
 }
+
+.Cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.CartDiv > p {
+  text-align: right;
+  margin-right: 3em;
+}
+
+.CartItem {
+  display: flex;
+    align-items: center;
+  justify-content: space-between;
+
+  /* width: 32%; */
+
+}
+
+.CartItem img {
+  width: 25%;
+  margin-right: 2em;
+}
+
+

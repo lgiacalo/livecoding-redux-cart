@@ -13,12 +13,10 @@ const Navbar = ({ cart }) => (
   <nav className="Navbar">
     <ul className="Navbar-left">
       <li>
-        {/* <a href="#">Home</a> */}
         <Link to="/">Home</Link>
       </li>
       <li>
         <Link to="/cart">Cart</Link>
-        {/* <a href="#">Cart</a> */}
       </li>
     </ul>
     <ul className="Navbar-right">
