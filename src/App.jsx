@@ -10,6 +10,7 @@ import {
   FETCH_PRODUCTS_FAILURE,
 } from './store/actions/types';
 import './App.css';
+import { networkSelector, productsSelector } from './store/selectors';
 
 class App extends Component {
   componentDidMount() {
@@ -69,9 +70,9 @@ App.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ network, products }) => ({
-  network,
-  products,
+const mapStateToProps = (state) => ({
+  network: networkSelector(state),
+  products: productsSelector(state),
 });
 
 export default connect(mapStateToProps)(App);
