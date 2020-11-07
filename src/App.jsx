@@ -3,33 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Navbar, Home, Cart } from './components';
-import {
-  FETCH_PRODUCTS_REQUEST,
-  FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_FAILURE,
-} from './store/actions/types';
-import * as api from './api';
+import { fetchProductsAction } from './store/actions';
 
 import './App.css';
 
 /* eslint-disable react/prefer-stateless-function */
 class App extends Component {
   componentDidMount() {
-    this.fetchProducts();
+    const { fetchProducts } = this.props;
+    fetchProducts();
   }
-
-  fetchProducts = () => {
-    const { dispatch } = this.props;
-    dispatch({ type: FETCH_PRODUCTS_REQUEST });
-    setTimeout(() => {
-      api
-        .fetchProducts()
-        .then((products) => {
-          dispatch({ type: FETCH_PRODUCTS_SUCCESS, products });
-        })
-        .catch((error) => dispatch({ type: FETCH_PRODUCTS_FAILURE, error }));
-    }, 1500);
-  };
 
   render() {
     return (
@@ -51,7 +34,19 @@ class App extends Component {
 }
 
 App.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  fetchProducts: PropTypes.func.isRequired,
 };
 
-export default connect()(App);
+const mapDispatchToProps = (dispatch) => ({
+  fetchProducts: fetchProductsAction(dispatch),
+});
+
+export default connect(null, mapDispatchToProps)(App);
+
+// const mapDispatchToProps = {
+//   handleAddToCart: addToCart,
+// };
+
+// const mapDispatchToProps = (dispatch) => ({
+//   handleAddToCart: product => addToCart(product)
+// })

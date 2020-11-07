@@ -4,19 +4,22 @@ import PropTypes from 'prop-types';
 import ProductList from './ProductList';
 
 import { networkSelector, productsSelector } from '../store/selectors';
+import { fetchProductsAction } from '../store/actions';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Home extends Component {
   render() {
     const {
       products,
       network: { isLoading, error },
+      fetchProducts,
     } = this.props;
     return (
       <div className="App">
         {error && (
           <div>
             <h3>{error}</h3>
-            <button type="button" onClick={this.fetchProducts}>
+            <button type="button" onClick={fetchProducts}>
               Try again
             </button>
           </div>
@@ -42,6 +45,7 @@ Home.propTypes = {
       name: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  fetchProducts: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -49,4 +53,8 @@ const mapStateToProps = (state) => ({
   products: productsSelector(state),
 });
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => ({
+  fetchProducts: fetchProductsAction(dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
