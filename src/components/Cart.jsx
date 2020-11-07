@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { cartSelector, totalPriceCart } from '../store/selectors';
 import CartItem from './CartItem';
-import './Cart.css';
 
 /* eslint-disable react/prefer-stateless-function */
 

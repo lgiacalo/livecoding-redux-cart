@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addToCart, removeToCart } from '../store/actions';
-import './Cart.css';
 
 /* eslint-disable react/prefer-stateless-function */
 
